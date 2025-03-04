@@ -1,7 +1,12 @@
 import * as authService from '../services/auth.service.js';
 import jwt from 'jsonwebtoken';
 
-// Register
+/**
+ * Creates a new user with the provided username and password.
+ * @param {object} req - The request object.
+ * @param {object} res - The response object.
+ * @returns {object} JSON response indicating success or failure.
+ */
 export const register = async (req, res) => {
     const { username, password } = req.body;
 
@@ -14,7 +19,12 @@ export const register = async (req, res) => {
     }
 };
 
-// Login
+/**
+ * Logs in a user with the provided username and password.
+ * @param {object} req - The request object.
+ * @param {object} res - The response object.
+ * @returns {object} JSON response indicating success or failure with a token.
+ */
 export const login = async (req, res) => {
     const { username, password } = req.body;
 

@@ -3,8 +3,9 @@
     <div class="max-w-xl w-full bg-white rounded-lg shadow-md overflow-hidden p-8">
       <h2 class="text-2xl font-semibold text-gray-700 mb-6 text-center">Grammar Checker</h2>
       <div class="space-y-4">
-        <div class="border p-2 rounded-md h-48 overflow-auto">
-          <p v-html="highlightedText"></p>
+        <div class="border p-2 rounded-md h-20 overflow-auto flex items-center justify-center">
+          <p v-if="!isLoading" v-html="highlightedText"></p>
+          <div v-else class="loader"></div>
         </div>
         <textarea
             v-model="text"
@@ -23,22 +24,36 @@ import axios from 'axios';
 import { debounce } from '../utils/debounce';
 
 const text = ref('');
+const previousText = ref('');
 const errors = ref([]);
+const isLoading = ref(false);
 
 // Fetch grammar corrections and errors from the backend
 const checkAndCorrectGrammar = async () => {
   try {
-    if (!text.value) {
-      errors.value = [];
+    const trimmedText = text.value.trim();
+
+    // 🛑 Avoid unnecessary API calls if the text hasn't changed
+    if (!trimmedText || trimmedText === previousText.value) {
       return;
     }
+
+    isLoading.value = true;
+
     const response = await axios.post(`${import.meta.env.VITE_APP_API_URL}/api/check-grammar`, {
       text: text.value,
+    }, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`
+      }
     });
-    // Store errors from response
+
+    previousText.value = trimmedText;
     errors.value = response.data.errors || [];
   } catch (error) {
     console.error('Error checking grammar:', error);
+  } finally {
+    isLoading.value = false;
   }
 };
 
@@ -48,7 +63,6 @@ const debouncedChecking = debounce(checkAndCorrectGrammar, 900);
 // Computed property that returns the text with highlighted error words
 const highlightedText = computed(() => {
   let html = text.value;
-  // Loop over each error and wrap the wrong word in a span with a tooltip
   errors.value.forEach((error) => {
     const regex = new RegExp(`\\b(${error.word})\\b`, 'gi');
     html = html.replace(
@@ -65,5 +79,20 @@ const highlightedText = computed(() => {
 <style>
 .highlight {
   color: darkred;
+}
+
+/* 🔹 Simple Loader */
+.loader {
+  width: 24px;
+  height: 24px;
+  border: 3px solid #3498db;
+  border-top: 3px solid transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 </style>

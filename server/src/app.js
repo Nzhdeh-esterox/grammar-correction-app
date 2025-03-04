@@ -6,6 +6,8 @@ dotenv.config();
 
 import authRoutes from './routes/auth.router.js';
 import grammarRoutes from './routes/grammar.router.js';
+import { authenticateToken } from './middleware/auth.middleware.js';
+
 import connectDB from './config/db.js'; // Import the DB connection
 
 const app = express();
@@ -20,6 +22,6 @@ app.use(bodyParser.json());
 
 // Routes
 app.use('/api/auth', authRoutes);
-app.use('/api/check-grammar', grammarRoutes);
+app.use('/api/check-grammar', authenticateToken, grammarRoutes);
 
 export default app;

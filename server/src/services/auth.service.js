@@ -1,11 +1,22 @@
 import User from '../models/User.js';
 
-// Function to find user by username
+/**
+ * Find a user by their username.
+ *
+ * @param {string} username - The username to search for.
+ * @return {Promise<User>} A promise that resolves to the user found by the username.
+ */
 export const findUserByUsername = async (username) => {
     return User.findOne({ username });
 };
 
-// Function to create a new user
+/**
+ * Creates a new user with the given username and password.
+ *
+ * @param {string} username - The username of the new user
+ * @param {string} password - The password of the new user
+ * @return {Promise} A promise that resolves to the saved user object
+ */
 export const createUser = async (username, password) => {
     const newUser = new User({ username, password });
 

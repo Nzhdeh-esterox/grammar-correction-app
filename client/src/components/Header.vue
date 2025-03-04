@@ -1,6 +1,6 @@
 <template>
-  <header class="bg-gradient-to-r from-orange-500 to-pink-500 text-white py-4 px-6 shadow-lg flex justify-between items-center">
-    <h1 class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-pink-200 to-purple-500">
+  <header class="fixed top-0 left-0 w-full z-50 bg-gradient-to-r from-orange-500 to-pink-500 text-white py-4 px-6 shadow-lg flex justify-between items-center">
+    <h1 class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-purple-500">
       Grammar Correction App
     </h1>
     <button

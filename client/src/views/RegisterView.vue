@@ -39,6 +39,7 @@
         >
           Sign Up
         </button>
+        <span v-if="errorMsg" class="text-red-500"> {{errorMsg}} </span>
       </form>
 
       <!-- Sign In Link -->
@@ -51,13 +52,14 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 import axios from 'axios';
 import { useRouter } from 'vue-router';
 
 const router = useRouter();
 const username = ref('');
 const password = ref('');
+const errorMsg = ref('');
 
 const signUp = async () => {
   try {
@@ -73,7 +75,13 @@ const signUp = async () => {
     }
   } catch (error) {
     console.error('Sign up error:', error);
-    alert('An error occurred during sign up.');
+    errorMsg.value = 'An error occurred during sign up.';
   }
 };
+
+watch([username, password], () => {
+  if (errorMsg.value) {
+    errorMsg.value = '';
+  }
+});
 </script>

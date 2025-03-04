@@ -8,20 +8,25 @@ const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY,
 });
 
+/**
+ * Corrects the grammar of the input text using OpenAI's language model.
+ *
+ * @param {string} text - The text to be checked and corrected for grammar.
+ * @return {Promise<string>} The corrected text after grammar check.
+ */
 export const grammarCorrector = async (text) => {
     try {
-        const { prompt, config } = getGrammarCheckPrompt(text); // Destructure prompt and config
+        const { prompt, config, responseFormat } = getGrammarCheckPrompt(text); // Destructure prompt and config
 
         const response = await openai.chat.completions.create({
             model: config.model,
             messages: [{ role: 'user', content: prompt }],
             temperature: config.temperature,
             max_tokens: config.max_tokens,
-            top_p: config.top_p,
             frequency_penalty: config.frequency_penalty,
-            presence_penalty: config.presence_penalty
+            presence_penalty: config.presence_penalty,
+            response_format: responseFormat
         });
-        console.log(' JSON.parse(result);', JSON.parse(response.choices[0].message.content))
 
         return response.choices[0].message.content;
     } catch (error) {
