@@ -9,15 +9,15 @@ export const getGrammarCheckPrompt = (text) => {
             Return a JSON format without any introductory text.`,
         config: {
             model: "gpt-4o-mini-2024-07-18",
-            temperature: 0.3,  // Lower values make responses more deterministic
-            max_tokens: 800,   // Limits response length
-            frequency_penalty: 0, // Adjusts likelihood of repetition
-            presence_penalty: 0   // Encourages new topic discussions
+            temperature: 0.3,
+            max_tokens: 800,
+            frequency_penalty: 0,
+            presence_penalty: 0
         },
         responseFormat: {
             "type": "json_schema",
             "json_schema": {
-                "name": "incorrect_words",  // ✅ Ensure name is inside "json_schema"
+                "name": "incorrect_words",
                 "schema": {
                     "type": "object",
                     "properties": {

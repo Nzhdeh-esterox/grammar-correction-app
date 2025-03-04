@@ -2,7 +2,7 @@ import OpenAI from 'openai';
 import dotenv from 'dotenv';
 dotenv.config();
 
-import { getGrammarCheckPrompt } from '../utils/prompts.js'; // Import prompt utility
+import { getGrammarCheckPrompt } from '../utils/prompts.js';
 
 const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY,
@@ -16,7 +16,7 @@ const openai = new OpenAI({
  */
 export const grammarCorrector = async (text) => {
     try {
-        const { prompt, config, responseFormat } = getGrammarCheckPrompt(text); // Destructure prompt and config
+        const { prompt, config, responseFormat } = getGrammarCheckPrompt(text);
 
         const response = await openai.chat.completions.create({
             model: config.model,

@@ -28,12 +28,10 @@ const previousText = ref('');
 const errors = ref([]);
 const isLoading = ref(false);
 
-// Fetch grammar corrections and errors from the backend
 const checkAndCorrectGrammar = async () => {
   try {
     const trimmedText = text.value.trim();
 
-    // 🛑 Avoid unnecessary API calls if the text hasn't changed
     if (!trimmedText || trimmedText === previousText.value) {
       return;
     }

@@ -18,9 +18,9 @@ import { useRouter } from 'vue-router';
 const router = useRouter();
 
 const logout = () => {
-  localStorage.removeItem('token'); // Remove the token from local storage
+  localStorage.removeItem('token');
 
-  router.push('/login'); // Redirect to the login page
+  router.push('/login');
 };
 </script>
 

@@ -85,7 +85,7 @@ const login = async () => {
 
 watch([username, password], () => {
   if (errorMsg.value) {
-    errorMsg.value = ''; // Clear error message when input changes
+    errorMsg.value = '';
   }
 });
 

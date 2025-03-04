@@ -13,10 +13,9 @@ module.exports = {
         sourceType: 'module',
     },
     rules: {
-        // Customize your rules
         'no-console': 'warn',
         'no-unused-vars': 'warn',
-        'semi': ['error', 'always'], // Require semicolons
+        'semi': ['error', 'always'],
         'padding-line-between-statements': [
             'error',
             { blankLine: 'always', prev: '*', next: '*' }, // Require one empty line before statements
