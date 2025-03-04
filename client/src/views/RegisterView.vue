@@ -69,8 +69,6 @@ const signUp = async () => {
     });
 
     if (response.status === 201) {
-      alert('Sign up successful!');
-
       await router.push('/login');
     }
   } catch (error) {
