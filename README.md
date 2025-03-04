@@ -48,7 +48,7 @@ This project is a simple grammar correction app that allows users to log in, log
 
 ## Deployment
 
-Deploy the application to a free hosting service (e.g., Heroku, Vercel) and share the link here.
+The project is deployed on a DigitalOcean Ubuntu Droplet.
 
 ## License
 

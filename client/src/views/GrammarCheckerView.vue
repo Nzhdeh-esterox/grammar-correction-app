@@ -32,7 +32,7 @@ const checkAndCorrectGrammar = async () => {
       errors.value = [];
       return;
     }
-    const response = await axios.post('http://localhost:5000/api/check-grammar', {
+    const response = await axios.post(`${import.meta.env.VITE_APP_API_URL}/api/check-grammar`, {
       text: text.value,
     });
     // Store errors from response
